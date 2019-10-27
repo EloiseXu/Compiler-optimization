@@ -1,0 +1,164 @@
+
+;; Function bit_shifter (bit_shifter, funcdef_no=3, decl_uid=3618, cgraph_uid=3)
+
+Released 0 names, 0.00%, removed 0 holes
+bit_shifter (long int x)
+{
+  int n;
+  int i;
+  int D.3667;
+  unsigned int i.1;
+  int D.3664;
+  int D.3663;
+  int _8;
+  int _9;
+  int _13;
+
+  <bb 2>:
+  n_4 = 0;
+  i_5 = n_4;
+  goto <bb 4>;
+
+  <bb 3>:
+  _8 = (int) x_1;
+  _9 = _8 & 1;
+  n_10 = _9 + n_3;
+  i_11 = i_2 + 1;
+  x_12 = x_1 >> 1;
+
+  <bb 4>:
+  # x_1 = PHI <x_6(D)(2), x_12(3)>
+  # i_2 = PHI <i_5(2), i_11(3)>
+  # n_3 = PHI <n_4(2), n_10(3)>
+  if (x_1 != 0)
+    goto <bb 5>;
+  else
+    goto <bb 6>;
+
+  <bb 5>:
+  i.1_7 = (unsigned int) i_2;
+  if (i.1_7 <= 63)
+    goto <bb 3>;
+  else
+    goto <bb 6>;
+
+  <bb 6>:
+  _13 = n_3;
+
+<L4>:
+  return _13;
+
+}
+
+
+
+;; Function main1 (main1, funcdef_no=2, decl_uid=3622, cgraph_uid=2)
+
+Released 0 names, 0.00%, removed 0 holes
+main1 (int argc, char * * argv, int print)
+{
+  static char * text[7] = {"Optimized 1 bit/loop counter", "Ratko\'s mystery algorithm", "Recursive bit count by nybbles", "Non-recursive bit count by nybbles", "Non-recursive bit count by bytes (BW)", "Non-recursive bit count by bytes (AR)", "Shift and count bits"};
+  static int (*<T92d>) (long int) pBitCntFunc[7] = {bit_count, bitcount, ntbl_bitcnt, ntbl_bitcount, BW_btbl_bitcount, AR_btbl_bitcount, bit_shifter};
+  int iterations;
+  long int seed;
+  long int n;
+  long int j;
+  int i;
+  int D.3661;
+  char * D.3660;
+  long int D.3657;
+  long int D.3656;
+  int D.3655;
+  int (*<T92d>) (long int) D.3654;
+  char * D.3651;
+  char * * D.3650;
+  struct _IO_FILE * stderr.0;
+  char * * _8;
+  char * _9;
+  long int _16;
+  int (*<T92d>) (long int) _17;
+  int _18;
+  long int _19;
+  char * _23;
+  int _25;
+
+  <bb 2>:
+  if (argc_5(D) <= 1)
+    goto <bb 3>;
+  else
+    goto <bb 4>;
+
+  <bb 3>:
+  stderr.0_6 = stderr;
+  __builtin_fwrite ("Usage: bitcnts <iterations>\n", 1, 28, stderr.0_6);
+  exit (1);
+
+  <bb 4>:
+  _8 = argv_7(D) + 8;
+  _9 = *_8;
+  iterations_10 = atoi (_9);
+  if (print_11(D) != 0)
+    goto <bb 5>;
+  else
+    goto <bb 6>;
+
+  <bb 5>:
+  puts ("Bit counter algorithm benchmark\n");
+
+  <bb 6>:
+  i_12 = 0;
+  goto <bb 13>;
+
+  <bb 7>:
+  n_13 = 0;
+  j_14 = n_13;
+  seed_15 = 1;
+  goto <bb 9>;
+
+  <bb 8>:
+  _17 = pBitCntFunc[i_1];
+  _18 = _17 (seed_4);
+  _19 = (long int) _18;
+  n_20 = _19 + n_3;
+  j_21 = j_2 + 1;
+  seed_22 = seed_4 + 13;
+
+  <bb 9>:
+  # j_2 = PHI <j_14(7), j_21(8)>
+  # n_3 = PHI <n_13(7), n_20(8)>
+  # seed_4 = PHI <seed_15(7), seed_22(8)>
+  _16 = (long int) iterations_10;
+  if (_16 > j_2)
+    goto <bb 8>;
+  else
+    goto <bb 10>;
+
+  <bb 10>:
+  if (print_11(D) != 0)
+    goto <bb 11>;
+  else
+    goto <bb 12>;
+
+  <bb 11>:
+  _23 = text[i_1];
+  printf ("%-38s> Bits: %ld\n", _23, n_3);
+
+  <bb 12>:
+  i_24 = i_1 + 1;
+
+  <bb 13>:
+  # i_1 = PHI <i_12(6), i_24(12)>
+  if (i_1 <= 6)
+    goto <bb 7>;
+  else
+    goto <bb 14>;
+
+  <bb 14>:
+  _25 = 0;
+
+<L12>:
+  return _25;
+
+}
+
+

@@ -1,0 +1,90 @@
+
+;; Function __bswap_32 (null)
+;; enabled by -tree-original
+
+
+{
+  return __builtin_bswap32 (__bsx);
+}
+
+
+;; Function __bswap_64 (null)
+;; enabled by -tree-original
+
+{
+  return (__uint64_t) __builtin_bswap64 (__bsx);
+}
+
+
+;; Function main1 (null)
+;; enabled by -tree-original
+
+{
+  int i;
+  long int j;
+  long int n;
+  long int seed;
+  int iterations;
+  static int (*<T92d>) (long int) pBitCntFunc[7] = {bit_count, bitcount, ntbl_bitcnt, ntbl_bitcount, BW_btbl_bitcount, AR_btbl_bitcount, bit_shifter};
+  static char * text[7] = {(char *) "Optimized 1 bit/loop counter", (char *) "Ratko\'s mystery algorithm", (char *) "Recursive bit count by nybbles", (char *) "Non-recursive bit count by nybbles", (char *) "Non-recursive bit count by bytes (BW)", (char *) "Non-recursive bit count by bytes (AR)", (char *) "Shift and count bits"};
+
+    int i;
+    long int j;
+    long int n;
+    long int seed;
+    int iterations;
+    static int (*<T92d>) (long int) pBitCntFunc[7] = {bit_count, bitcount, ntbl_bitcnt, ntbl_bitcount, BW_btbl_bitcount, AR_btbl_bitcount, bit_shifter};
+    static char * text[7] = {(char *) "Optimized 1 bit/loop counter", (char *) "Ratko\'s mystery algorithm", (char *) "Recursive bit count by nybbles", (char *) "Non-recursive bit count by nybbles", (char *) "Non-recursive bit count by bytes (BW)", (char *) "Non-recursive bit count by bytes (AR)", (char *) "Shift and count bits"};
+  if (argc <= 1)
+    {
+      fprintf ((struct FILE * restrict) stderr, (const char * restrict) "Usage: bitcnts <iterations>\n");
+      exit (1);
+    }
+  iterations = atoi ((const char *) *(argv + 8));
+  if (print != 0)
+    {
+      puts ((const char *) "Bit counter algorithm benchmark\n");
+    }
+  i = 0;
+  goto <D.3636>;
+  <D.3635>:;
+  j = n = 0;, seed = 1;;
+  goto <D.3633>;
+  <D.3632>:;
+  n = (long int) pBitCntFunc (seed) + n;
+  j++ ;, seed = seed + 13;;
+  <D.3633>:;
+  if ((long int) iterations > j) goto <D.3632>; else goto <D.3634>;
+  <D.3634>:;
+  if (print != 0)
+    {
+      printf ((const char * restrict) "%-38s> Bits: %ld\n", text[i], n);
+    }
+  i++ ;
+  <D.3636>:;
+  if (i <= 6) goto <D.3635>; else goto <D.3637>;
+  <D.3637>:;
+  return 0;
+}
+
+
+;; Function bit_shifter (null)
+;; enabled by -tree-original
+
+{
+  int i;
+  int n;
+
+    int i;
+    int n;
+  i = n = 0;
+  goto <D.3644>;
+  <D.3643>:;
+  n = ((int) x & 1) + n;
+   ++i;, x = x >> 1;;
+  <D.3644>:;
+  if (x != 0 && (unsigned int) i <= 63) goto <D.3643>; else goto <D.3645>;
+  <D.3645>:;
+  return n;
+}
+
